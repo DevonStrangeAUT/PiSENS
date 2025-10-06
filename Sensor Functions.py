@@ -14,6 +14,12 @@ radians = sense.get_orientation_radians()
 
 degrees = sense.get_orientation_degrees()
 
+orientation = sense.get_orientation()
+
+compass = sense.get_compass()
+
+rawCompass = sense.get_compass_raw()
+
 
 
 
