@@ -20,6 +20,8 @@ compass = sense.get_compass()
 
 rawCompass = sense.get_compass_raw()
 
+accelerometer = sense.get_accelerometer()
 
+rawAccelerometer = sense.get_accelerometer_raw()
 
 
