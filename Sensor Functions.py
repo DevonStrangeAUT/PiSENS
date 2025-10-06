@@ -8,6 +8,8 @@ temperature = sense.get_temperature()
 
 tempfromHumidity = sense.get_temperature_from_humidity()
 
+pressure = sense.get_pressure()
+
 
 
 
