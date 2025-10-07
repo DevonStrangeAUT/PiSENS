@@ -6,7 +6,7 @@ sense = SenseHat()
 def main():
     parser = argparse.ArgumentParser(description='Read Sensor Data from Sense Hat')
     parser.add_argument(
-        "Sensor Type",
+        "SensorType",
         choices=[
         "humidity",
         "temperature",
