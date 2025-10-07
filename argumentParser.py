@@ -1,11 +1,12 @@
 import argparse
 import sqlite3
+import os
 from sense_hat import SenseHat
 from datetime import datetime
 
 sense = SenseHat()
 
-DB_FILE = "sensor_readings.db" # Database file names.
+DB_FILE = os.path.join(os.getcwd(), "sensor_readings.db")
 
 def save_readings(SensorType, value):
     """Save a sensor reading to the SQLite database."""
