@@ -1,10 +1,38 @@
 import argparse
+import sqlite3
 from sense_hat import SenseHat
+from datetime import datetime
 
 sense = SenseHat()
 
+DB_FILE = "sensor_readings.db" # Database file names.
+
+def save_readings(SensorType, value):
+    """Save a sensor reading to the SQLite database."""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+
+    # If a table doesn't exist within the db, make one.
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS readings (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            sensor_type TEXT NOT NULL,
+            value TEXT NOT NULL,
+            timestamp DATETIME NOT NULL
+        )
+    """)
+
+    # Insert the new reading
+    cursor.execute(
+        "INSERT INTO readings (sensor_type, value, timestamp) VALUES (?, ?, ?)",
+        (SensorType, str(value), datetime.now())
+    )
+
+    conn.commit()
+    conn.close()
+
 def main():
-    parser = argparse.ArgumentParser(description='Read Sensor Data from Sense Hat')
+    parser = argparse.ArgumentParser(description='Read Sensor Data from Sense Hat.')
     parser.add_argument(
         "SensorType",
         choices=[
@@ -16,7 +44,7 @@ def main():
         "orientation_degrees",
         "orientation",
         "compass",
-        "compass_raw"
+        "compass_raw",
         "accelerometer",
         "accelerometer_raw",
     ],
@@ -42,8 +70,15 @@ def main():
     function = sensorFunctions[args.SensorType]
     value = function()
 
-    print(f"{value:.2f}")
+    if isinstance(value, (int, float)):
+        print(f"{value:.2f}")
+    else:
+        print(value)
 
+# == Local SQLite Functionality ==
+
+    # Save to SQLite
+    save_readings(args.SensorType, value)
 
 if __name__ == "__main__":
     main()
