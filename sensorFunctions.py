@@ -10,6 +10,7 @@ tempfromHumidity = sense.get_temperature_from_humidity()
 pressure = sense.get_pressure()
 
 # == Orientation Readings ==
+
 radians = sense.get_orientation_radians()
 degrees = sense.get_orientation_degrees()
 orientation = sense.get_orientation()
