@@ -42,7 +42,7 @@ def main():
     function = sensorFunctions[args.SensorType]
     value = function()
 
-    print(f"{args.sensorType}: readings: {value}")
+    print(f"{args.SensorType}: readings: {value}")
 
 if __name__ == "__main__":
     main()
